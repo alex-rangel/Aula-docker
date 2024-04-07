@@ -63,6 +63,8 @@ function Home() {
     const { data } = await api.get('/')
 
      setUsers(data) 
+
+     console.log(data)
  
   }
 
