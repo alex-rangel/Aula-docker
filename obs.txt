@@ -1,0 +1,46 @@
+AULA 3:
+
+comando para criar uma imagem da api: docker build -t api-register .
+
+Comando para rodar o constainer usando a imagem da api que foi criada: docker run -dp 127.0.0.1:3003:3003 api-register
+
+
+AULA 4:
+
+Comando para criar uma network no docker: docker network create net-register
+
+Comando para rodar o container da api usando a imagem da api dentro da network q eu desejar: docker run --network net-register -dp 127.0.0.1:3003:3003 api-register
+
+Comando para rodar o container com o banco de dados do mongo dentro da network que eu desejar: docker run -d --name mongo-register -p 27017:27017 --network net-register mongo
+
+
+AULA 5:
+
+comando para criar uma imagem do frontend: docker build -t front-register .
+
+comando para rodar um container do frontend: docker run --name front-register -it front-register
+
+** Apos criar uma uma imagem da aplicação react e importante criar um container de teste so para poder visualizar se todos os arquivos da imagem do react foram criados de forma correta.
+
+Comando para poder entrar dentro do container: docker exec -it front-register /bin/bash
+
+
+AULA 6:
+
+Para poder servir os arquivos de uma pagina web e preciso usar um servidor web, oque vai ser usado sera o NGINX,
+
+Tambem sere necessario criar um volume para poder salvar os arquivos da minha pagina web dentro do meu HD
+
+comando para criar uma imagem do frontend apos criar o volume: docker build -t front-register .
+
+comando para rodar um container do frontend com o volume: docker run -d --name front-register -v volume-register:/var/www/html --network net-register front-register
+
+** Apos isso tem uer ser criado um arquivo de configuração para o nginx e tbm um arquivo Dockerfile dentro da pasta do nginx
+
+Comando para criar uma imagem do nginx: docker build -t nginx-register .
+
+Comando para rodar o container do nginx com o volume ja incluso: docker run -d --name nginx-container -v volume-register:/var/www/html -p 80:80 --network net-register nginx-register
+
+** Para que o nginx tenha acesso as rotas eu preciso configurar isso no arquivo nginx.conf
+
+
