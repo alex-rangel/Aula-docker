@@ -2,14 +2,14 @@ AULA 3:
 
 comando para criar uma imagem da api: docker build -t api-register .
 
-Comando para rodar o constainer usando a imagem da api que foi criada: docker run -dp 127.0.0.1:3003:3003 api-register
+Comando para rodar o constainer usando a imagem da api que foi criada: docker run -d --name api-teste -p 3003:3003 api-register
 
 
 AULA 4:
 
 Comando para criar uma network no docker: docker network create net-register
 
-Comando para rodar o container da api usando a imagem da api dentro da network q eu desejar: docker run --network net-register -dp 127.0.0.1:3003:3003 api-register
+Comando para rodar o container da api usando a imagem da api dentro da network q eu desejar: docker run -d --name api-teste -p 3003:3003 --network net-register api-register
 
 Comando para rodar o container com o banco de dados do mongo dentro da network que eu desejar: docker run -d --name mongo-register -p 27017:27017 --network net-register mongo
 
@@ -29,9 +29,9 @@ AULA 6:
 
 Para poder servir os arquivos de uma pagina web e preciso usar um servidor web, oque vai ser usado sera o NGINX,
 
-Tambem sere necessario criar um volume para poder salvar os arquivos da minha pagina web dentro do meu HD
+Tambem sera necessario criar um volume para poder salvar os arquivos da minha pagina web dentro do meu HD
 
-comando para criar uma imagem do frontend apos criar o volume: docker build -t front-register .
+comando para criar uma imagem do frontend apos criar o volume dentro do arquivo dockerfile: docker build -t front-register .
 
 comando para rodar um container do frontend com o volume: docker run -d --name front-register -v volume-register:/var/www/html --network net-register front-register
 
