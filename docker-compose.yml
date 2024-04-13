@@ -1,0 +1,45 @@
+services:
+  mongo-register:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongdb-register-volume:/data/db
+    restart: always
+
+  api-register:
+    container_name: api-register
+    build: ./api
+    restart: always
+    ports:
+      - 3003:3003
+    depends_on:
+      - mongo-register
+    # env_file:
+    #   - ./api/.env
+
+  front-register:
+    container_name: front-register
+    build: ./front
+    depends_on:
+      - api-register
+    # env_file:
+    #   - ./spa/.env
+    volumes:
+      - register-volume:/var/www/html
+
+  nginx:
+    container_name: nginx-register
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - register-volume:/var/www/html
+    depends_on:
+      - mongo-register
+      - api-register
+      - front-register
+
+volumes:
+  mongdb-register-volume:
+  register-volume:

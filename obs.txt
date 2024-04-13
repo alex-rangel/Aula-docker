@@ -41,6 +41,58 @@ Comando para criar uma imagem do nginx: docker build -t nginx-register .
 
 Comando para rodar o container do nginx com o volume ja incluso: docker run -d --name nginx-container -v volume-register:/var/www/html -p 80:80 --network net-register nginx-register
 
-** Para que o nginx tenha acesso as rotas eu preciso configurar isso no arquivo nginx.conf
+** Para que o nginx tenha acesso as rotas eu preciso configurar o #fallback no arquivo nginx.conf
 
+AULA 8:
 
+Sempre que as propriedades são terminadas em plural se coloca o valor com um traço antes, por que ai da pra se colocar varios valores dentro dele.
+
+O comando para rodar o docker compose é: docker compose up -d
+
+Para poder descer e apagar todos os container é so da o comando: docker compose down
+
+Se quiser apagar os os volumes tem que ser o comando: docker compose down -v
+
+** Se mudar alguma coisa no codigo e quiser atualizar os containers e as imagens e do dá o comando para apagar todos os containers e apagars todas as imagens de forma manual
+
+AULA 9:
+
+Apos criar a minha estancia no ec2 da aws e conectar na minha estancia tenho que fazer as instalações necessarias na minha maquina da aws.
+
+--Instalando o docker--
+
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+--Adicionando o repositório às fontes do Apt--
+
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+--Verificando a instalação do docker--
+
+    sudo docker run hello-world
+
+--Criando o grupo do docker--
+
+    sudo groupadd docker
+
+--Adicionando o meu usuário ao grupo docker--
+
+    sudo usermod -aG docker $USER
+
+--Ultimo comando para não precisar colocar o sudo nos comandos do docker--
+
+    newgrp docker
+
+--Verificando se o procedimeto deu certo--
+
+    docker run hello-world
+
+**Apos realizar todo esse procedimento basta clonar o repositório dentro da instancia da aws e executar os comandos para poder gerar as imagens e os containers atraves do docker
