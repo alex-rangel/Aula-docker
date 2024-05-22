@@ -96,3 +96,7 @@ sudo apt-get update
     docker run hello-world
 
 **Apos realizar todo esse procedimento basta clonar o repositório dentro da instancia da aws e executar os comandos para poder gerar as imagens e os containers atraves do docker
+
+CONSIDERAÇÕES FINAIS: 
+
+-- Quando se quer saber se o sevidor esta rodando damos o comando: docker logs "nome do container " "devbills-api" --follow
