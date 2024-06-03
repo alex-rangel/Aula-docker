@@ -99,4 +99,6 @@ sudo apt-get update
 
 CONSIDERAÇÕES FINAIS: 
 
--- Quando se quer saber se o sevidor esta rodando damos o comando: docker logs "nome do container " "devbills-api" --follow
+-- Quando se quer saber se o sevidor esta rodando damos o comando: docker logs "nome do container " "devbills-api" --follow,
+com este comando podemos acompanhar o container docker e tbm ver os erros que o conteiner possa ter. Um outro comando muito impotante é o 
+docker logs --help com esse comando conseguimos ver todas as configurações que conseguimos passar para poder fazer uma filtragem sobre o que queremos ver nos logs. 
